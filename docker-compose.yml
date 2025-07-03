@@ -122,6 +122,44 @@ services:
         networks:
             - kafka-net
 
+    post-db:
+        image: postgres:15
+        container_name: post-db
+        restart: always
+        environment:
+            POSTGRES_USER: aman
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: post_service
+        ports:
+            - '5432:5432'
+        volumes:
+            - 'post_pgdata:/var/lib/postgresql/data'
+        networks:
+            - kafka-net
+
+    post-service:
+        build:
+            context: .
+            dockerfile: post-services/Dockerfile
+        container_name: post-services
+        ports:
+            - '3001:3000'
+        environment:
+            NODE_ENV: development
+            DB_HOST: post-db
+            DB_PORT: 5432
+            DB_USERNAME: aman
+            DB_PASSWORD: root
+            DB_NAME: post_service
+            REDIS_URL: redis://redis:6379
+        depends_on:
+            - auth-db
+            - redis
+            - kafka1
+            - kafka2
+        networks:
+            - kafka-net
+
     nginx:
         image: nginx:alpine
         container_name: nginx
@@ -137,6 +175,7 @@ services:
 volumes:
     auth_pgdata:
     backend2_pgdata:
+    post_pgdata:
 
 networks:
     kafka-net:
