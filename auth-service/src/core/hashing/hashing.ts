@@ -1,5 +1,8 @@
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
+import AppLogger from '../logger';
+
+const logger = new AppLogger();
 
 function deriveSalt(userIdentifier: string, userName: string): string {
     const hmac = crypto.createHmac('sha512', userIdentifier);
@@ -20,7 +23,8 @@ export async function comparePassword(password: string, hashedPassword: string, 
     const saltedPassword = password + salt;
     try {
         return await bcrypt.compare(saltedPassword, hashedPassword);
-    } catch (_) {
+    } catch (err) {
+        logger.error(err as object);
         return false;
     }
 }

@@ -29,7 +29,7 @@ function transformRawResult(rawResult: Record<string, string | object>): UserDet
         }
     });
 
-    return transformedResult as UserDetailsDbResponseDto;
+    return transformedResult as object as UserDetailsDbResponseDto;
 }
 
 export default transformRawResult;

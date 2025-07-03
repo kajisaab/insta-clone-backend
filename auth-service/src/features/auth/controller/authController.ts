@@ -8,31 +8,15 @@ import { SignupUseCaseResponse } from '@features/auth/response/signup.usecase.re
 import { LoginUseCaseResponse } from '@features/auth/response/login.usecase.response';
 
 export class AuthController {
-    public static async loginController(
-        req: Request,
-        res: Response,
-        _next: NextFunction
-    ): Promise<Result<LoginUseCaseResponse>> {
+    public static async loginController(req: Request, res: Response, _next: NextFunction): Promise<Result<LoginUseCaseResponse>> {
         const loginUseCase = new LoginUseCase(); // Instantiate UseCase
 
-        return await loginUseCase.execute(
-            req.body as LoginUseCaseRequest,
-            undefined,
-            res
-        );
+        return await loginUseCase.execute(req.body as LoginUseCaseRequest, undefined, res);
     }
 
-    public static async signupController(
-        req: Request,
-        res: Response,
-        _next: NextFunction
-    ): Promise<Result<SignupUseCaseResponse>> {
+    public static async signupController(req: Request, res: Response, _next: NextFunction): Promise<Result<SignupUseCaseResponse>> {
         const signupUseCase = new SignupUseCase();
 
-        return await signupUseCase.execute(
-            req.body as SignupUseCaseRequest,
-            undefined,
-            res
-        );
+        return await signupUseCase.execute(req.body as SignupUseCaseRequest, undefined, res);
     }
 }

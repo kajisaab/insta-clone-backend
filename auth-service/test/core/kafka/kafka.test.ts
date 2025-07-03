@@ -29,7 +29,7 @@ describe('Kafka Test', () => {
             // Disconnect
             await kafkaService.disconnect();
         } catch (error) {
-            logger.error('Failed to test Kafka:', error);
+            logger.error(`Failed to test Kafka: error`);
         }
     });
 });

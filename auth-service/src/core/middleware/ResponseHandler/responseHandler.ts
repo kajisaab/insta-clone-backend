@@ -1,7 +1,7 @@
-import type { Response, NextFunction } from 'express';
+import type { Response, NextFunction, Request } from 'express';
 import AppLogger from '@core/logger';
 
-export function responseInterceptor(req: any, res: Response, next: NextFunction): void {
+export function responseInterceptor(req: Request, res: Response, next: NextFunction): void {
     const logger = new AppLogger();
     // Save the original send method
     const originalSend = res.send.bind(res);
@@ -10,17 +10,17 @@ export function responseInterceptor(req: any, res: Response, next: NextFunction)
     const token: string = req.cookies?.accessToken ?? (req.headers['x-xsrf-token'] as string);
 
     // Override the send method to intercept the response
-    res.send = ((body: any) => {
+    res.send = ((body: object) => {
         const option = {
             httpOnly: true,
             secure: true,
         };
-        if (token !== null && token !== undefined) {
+        if (token !== null && token !== undefined && req.user?.userId) {
             generateCookiesAndUpdateRefreshTokenOnTable(token, req?.user?.userId)
                 .then((result: generateCookiesAndUpdateRefreshTokenOnTableInterface) => {
                     res.cookie('accessToken', result.accessToken, option).cookie('refreshToken', result.refreshToken, option);
                 })
-                .catch((err: any) => {
+                .catch((err) => {
                     logger.error(err);
                 });
         } else {
