@@ -5,6 +5,6 @@ export class LoginUseCaseRequest implements UseCaseRequest {
         public readonly userName: string,
         public readonly password: string,
         public readonly ip: string,
-        public readonly optIntoOneTap: boolean,
+        public readonly optIntoOneTap: boolean
     ) {}
 }

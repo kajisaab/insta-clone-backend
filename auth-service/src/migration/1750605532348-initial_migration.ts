@@ -4,6 +4,8 @@ export class InitialMigration1750605532348 implements MigrationInterface {
     name = 'InitialMigration1750605532348';
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE SCHEMA IF NOT EXISTS "instagram"`);
+
         await queryRunner.query(
             `CREATE TABLE "instagram"."user_details" ("id" text NOT NULL, "is_deleted" boolean DEFAULT false, "created_by" jsonb, "created_date_time" TIMESTAMP, "last_modified_by" jsonb, "last_modified_date_time" TIMESTAMP, "first_name" text, "last_name" text, "user_name" text, "email" text, "user_image" text, "roles" jsonb, "bio" text, "phone_number" text, "selected_theme" text, "is_active" boolean, "is_blocked" boolean, "is_verified" boolean, "logged_in_ip" jsonb, CONSTRAINT "PK_fb08394d3f499b9e441cab9ca51" PRIMARY KEY ("id"))`
         );
