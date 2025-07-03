@@ -11,7 +11,7 @@ export class Result<T> {
         this.errors = error;
     }
 
-    static createSuccess(data: object): Result<object | unknown> {
+    static createSuccess<T>(data: T): Result<T> {
         return new Result('0', 'SUCCESS', data, []);
     }
 }
