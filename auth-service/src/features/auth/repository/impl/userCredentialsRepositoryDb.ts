@@ -3,7 +3,6 @@ import { UserCredentialsEntity } from '../../entity/userCredentials.entity';
 
 export class UserCredentialsRepositoryDb implements UserCredentialsRepository {
     findByUserId(userId: string): Promise<UserCredentialsEntity> {
-        console.log({ userId });
         throw new Error('Method not implemented.');
     }
 }

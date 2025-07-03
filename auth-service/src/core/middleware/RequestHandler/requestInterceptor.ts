@@ -1,8 +1,8 @@
 import { PublicRoutes } from '@/src/common/publicRoutes';
-import type { NextFunction, Response } from 'express';
+import type { NextFunction, Response, Request } from 'express';
 import { UnauthorizedError } from '../errorHandler/unauthorizedError';
 
-function requestInterceptor(req: any, _res: Response, next: NextFunction): void {
+function requestInterceptor(req: Request, _res: Response, next: NextFunction): void {
     const inputs = [req.params, req.query, req.body];
 
     for (const input of inputs) {
@@ -14,9 +14,7 @@ function requestInterceptor(req: any, _res: Response, next: NextFunction): void 
         }
     }
 
-    const isExcludedRoute = PublicRoutes.some((route: string) =>
-        req.originalUrl.includes(route)
-    );
+    const isExcludedRoute = PublicRoutes.some((route: string) => req.originalUrl.includes(route));
 
     if (isExcludedRoute) {
         next();
@@ -24,8 +22,7 @@ function requestInterceptor(req: any, _res: Response, next: NextFunction): void 
     }
 
     // here validate the api for the token;
-    const token: string =
-        req.cookies?.accessToken ?? (req.headers['x-xsrf-token'] as string);
+    const token: string = req.cookies?.accessToken ?? (req.headers['x-xsrf-token'] as string);
 
     if (token === null || token === '' || token === undefined) {
         throw new UnauthorizedError('Token not provided');

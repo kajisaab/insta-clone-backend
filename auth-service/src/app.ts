@@ -10,10 +10,13 @@ import requestInterceptor from '@core/middleware/RequestHandler/requestIntercept
 import shouldCompress from '@config/compressionConfiguration';
 import routes from './routes';
 import { setupSwagger } from './swagger';
+import AppLogger from './core/logger';
 
 const { apiPrefix } = getAppConfig();
 
 const app = express();
+
+const logger = new AppLogger();
 
 /**
  * PARSE JSON BODIES TO THE OBJECT
@@ -51,9 +54,7 @@ app.use(compression({ filter: shouldCompress }));
 app.use(`${apiPrefix}`, routes);
 
 // Initialize Swagger
-setupSwagger(app).catch((err) =>
-    console.error('Failed to setup Swagger:', err)
-);
+setupSwagger(app).catch((err) => logger.error(`Failed to setup Swagger:, ${err}`));
 
 /**
  * RESPONSE MIDDLEWARE TO MODIFY THE RESPONSE MAINLY USED TO SEND TOKEN TO THE CLIENT USING COOKIE OR ON HEADER

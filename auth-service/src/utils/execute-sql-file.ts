@@ -1,7 +1,10 @@
 // src/utils/migration-helper.ts
-import * as fs from "fs";
-import * as path from "path";
-import { QueryRunner } from "typeorm";
+import * as fs from 'fs';
+import * as path from 'path';
+import { QueryRunner } from 'typeorm';
+import AppLogger from '../core/logger';
+
+const logger = new AppLogger();
 
 export async function executeSqlFile(queryRunner: QueryRunner, version: string, operation: string): Promise<void> {
     const filename = `v${version}-${operation}.sql`;
@@ -11,7 +14,7 @@ export async function executeSqlFile(queryRunner: QueryRunner, version: string, 
         const sqlContent = fs.readFileSync(sqlFilePath).toString();
 
         // Split SQL by semicolons to handle multiple statements if needed
-        const statements = sqlContent.split(';').filter(statement => statement.trim());
+        const statements = sqlContent.split(';').filter((statement) => statement.trim());
 
         for (const statement of statements) {
             if (statement.trim()) {
@@ -19,6 +22,6 @@ export async function executeSqlFile(queryRunner: QueryRunner, version: string, 
             }
         }
     } else {
-        console.warn(`SQL file not found: ${sqlFilePath}`);
+        logger.error(`SQL file not found: ${sqlFilePath}`);
     }
 }

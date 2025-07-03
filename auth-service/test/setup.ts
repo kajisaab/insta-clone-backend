@@ -1,4 +1,7 @@
+import AppLogger from '@/src/core/logger';
 import { app, server } from '@src/index';
+
+const logger = new AppLogger();
 
 // Global setup for tests
 beforeAll(async () => {
@@ -9,7 +12,7 @@ afterAll(async () => {
     // Close the server to prevent Jest from hanging
     await new Promise<void>((resolve) => {
         server.close(() => {
-            console.log('Server closed');
+            logger.log('Server closed');
             resolve();
         });
     });

@@ -9,27 +9,18 @@ function deriveSalt(userIdentifier: string, userName: string): string {
     return data.digest('hex');
 }
 
-export async function hashPassword(
-    password: string,
-    userIdentifier: string,
-    userName: string
-): Promise<string> {
+export async function hashPassword(password: string, userIdentifier: string, userName: string): Promise<string> {
     const salt = deriveSalt(userIdentifier, userName);
     const saltedPassword = password + salt;
     return await bcrypt.hash(saltedPassword, 12);
 }
 
-export async function comparePassword(
-    password: string,
-    hashedPassword: string,
-    userIdentifier: string,
-    userName: string
-): Promise<boolean> {
+export async function comparePassword(password: string, hashedPassword: string, userIdentifier: string, userName: string): Promise<boolean> {
     const salt = deriveSalt(userIdentifier, userName);
     const saltedPassword = password + salt;
     try {
         return await bcrypt.compare(saltedPassword, hashedPassword);
-    } catch (e) {
+    } catch (_) {
         return false;
     }
 }

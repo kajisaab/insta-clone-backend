@@ -1,6 +1,8 @@
+import AppLogger from '@/src/core/logger';
 import KafkaService from '@core/kafka/kafka';
 
 describe('Kafka Test', () => {
+    const logger = new AppLogger();
     //
     // it('Should handle message sending in test environment', async () => {
     //     const producingMessage = 'test-message';
@@ -20,16 +22,14 @@ describe('Kafka Test', () => {
             await kafkaService.connectProducer();
 
             // Send a test message
-            await kafkaService.sendMessage('test-topic', [
-                { value: JSON.stringify({ test: 'Hello Kafka!' }) },
-            ]);
+            await kafkaService.sendMessage('test-topic', [{ value: JSON.stringify({ test: 'Hello Kafka!' }) }]);
 
-            console.log('Test message sent successfully');
+            logger.log('Test message sent successfully');
 
             // Disconnect
             await kafkaService.disconnect();
         } catch (error) {
-            console.error('Failed to test Kafka:', error);
+            logger.error('Failed to test Kafka:', error);
         }
     });
 });

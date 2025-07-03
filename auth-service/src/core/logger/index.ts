@@ -20,22 +20,16 @@ export default class AppLogger {
             warn: '\x1b[33m', // Yellow
             verbose: '\x1b[34m', // Blue
             debug: '\x1b[35m', // Magenta
-            reset: '\x1b[0m' // Reset to default color
+            reset: '\x1b[0m', // Reset to default color
         };
 
-        const customLoggerFormat = printf(
-            ({ level, message, label, timestamp }) => {
-                const color = colors[level as keyof typeof colors] || colors.reset;
-                return `${color}${timestamp} [${label}] ${level}: ${message}${colors.reset}`;
-            }
-        );
+        const customLoggerFormat = printf(({ level, message, label, timestamp }) => {
+            const color = colors[level as keyof typeof colors] || colors.reset;
+            return `${color}${timestamp} [${label}] ${level}: ${message}${colors.reset}`;
+        });
 
         this.logger = createLogger({
-            format: combine(
-                label({ label: 'AppLog' }),
-                timestamp(),
-                customLoggerFormat
-            ),
+            format: combine(label({ label: 'AppLog' }), timestamp(), customLoggerFormat),
             transports: [
                 new transports.Console(),
                 new transports.File({
@@ -46,29 +40,29 @@ export default class AppLogger {
                         printf(({ level, message, label, timestamp }) => {
                             return `${timestamp} [${label}] ${level}: ${message}`;
                         })
-                    ) // No colors for file logs
-                })
-            ]
+                    ), // No colors for file logs
+                }),
+            ],
         });
     }
 
-    log(message: any) {
+    log(message: string | object) {
         this.logger.log(WinstonLogLevel.INFO, message);
     }
 
-    error(message: any) {
+    error(message: string | object) {
         this.logger.log(WinstonLogLevel.ERROR, message);
     }
 
-    warn(message: any) {
+    warn(message: string | object) {
         this.logger.log(WinstonLogLevel.WARN, message);
     }
 
-    debug(message: any) {
+    debug(message: string | object) {
         this.logger.log(WinstonLogLevel.DEBUG, message);
     }
 
-    verbose(message: any) {
+    verbose(message: string | object) {
         this.logger.log(WinstonLogLevel.VERBOSE, message);
     }
 }
