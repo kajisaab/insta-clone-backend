@@ -52,10 +52,7 @@ export default tseslint.config(
         files: ['**/*.ts', '**/*.tsx'],
         rules: {
             '@typescript-eslint/no-require-imports': 'off',
-            '@typescript-eslint/consistent-type-definitions': [
-                'error',
-                'interface',
-            ],
+            '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 {
@@ -63,6 +60,7 @@ export default tseslint.config(
                     varsIgnorePattern: '^_',
                 },
             ],
+            '@typescript-eslint/no-empty-object-type': 'off',
             'no-unused-vars': 'off',
             'prefer-destructuring': 'off',
             semi: ['error', 'always'],
