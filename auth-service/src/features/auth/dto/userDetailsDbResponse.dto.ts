@@ -1,6 +1,6 @@
 import { LabelValuePair } from '@common/dto/labelValuePair';
 
-export interface UserDetailsDbResponseDto{
+export interface UserDetailsDbResponseDto {
     id: string;
     firstName: string;
     lastName: string;

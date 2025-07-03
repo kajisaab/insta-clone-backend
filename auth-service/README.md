@@ -66,30 +66,33 @@ This project provides a scalable and maintainable backend for a social media app
 ### Installation
 
 1. Clone the repository
-   ```bash
-   git clone <repository-url>
-   cd instagram-backend
-   ```
+
+    ```bash
+    git clone <repository-url>
+    cd instagram-backend
+    ```
 
 2. Install dependencies
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
 3. Set up environment variables
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
+
+    ```bash
+    cp .env.example .env
+    # Edit .env with your configuration
+    ```
 
 4. Start the development server
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
 
 ### Environment Variables
 

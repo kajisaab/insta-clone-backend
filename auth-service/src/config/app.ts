@@ -42,10 +42,7 @@ const appConfigs: Record<string, AppConfig> = {
         dbPassword: process.env.DB_PASSWORD || 'root',
         dbName: process.env.DB_NAME || 'auth_service',
         redisUrl: process.env.REDIS_URL || 'redis://redis:6379',
-        sessionExpiresIn: parseInt(
-            process.env.SESSION_EXPIRES_IN || '2592000000',
-            10
-        ),
+        sessionExpiresIn: parseInt(process.env.SESSION_EXPIRES_IN || '2592000000', 10),
         rsaPrivateKey: process.env.RSA_PRIVATE_KEY as string,
         kafkaBroker: process.env.KAFKA_BROKER as string,
     },
@@ -56,8 +53,7 @@ const appConfigs: Record<string, AppConfig> = {
         corsOrigin: process.env.TEST_CORS_ORIGIN || '*',
         jwtSecret: process.env.TEST_JWT_SECRET || 'test_secret_key',
         jwtExpiresIn: process.env.TEST_JWT_EXPIRES_IN || '1h',
-        refreshSecret:
-            process.env.TEST_REFRESH_SECRET || 'test_refresh_secret_key',
+        refreshSecret: process.env.TEST_REFRESH_SECRET || 'test_refresh_secret_key',
         refreshExpiresIn: process.env.TEST_REFRESH_EXPIRES_IN || '30d',
         dbHost: process.env.TEST_DB_HOST || 'localhost',
         dbPort: parseInt(process.env.TEST_DB_PORT || '5432', 10),
@@ -65,10 +61,7 @@ const appConfigs: Record<string, AppConfig> = {
         dbPassword: process.env.TEST_DB_PASSWORD || 'test_password',
         dbName: process.env.TEST_DB_NAME || 'instagram',
         redisUrl: process.env.TEST_REDIS_URL || 'redis://localhost:6379',
-        sessionExpiresIn: parseInt(
-            process.env.TEST_SESSION_EXPIRES_IN || '2592000000',
-            10
-        ),
+        sessionExpiresIn: parseInt(process.env.TEST_SESSION_EXPIRES_IN || '2592000000', 10),
         rsaPrivateKey: process.env.TEST_RSA_PRIVATE_KEY as string,
         kafkaBroker: process.env.TEST_KAFKA_BROKER as string,
     },

@@ -15,6 +15,4 @@ readFileSync(resolve(process.cwd(), '.env.test'), 'utf8')
         }
     });
 
-console.log(
-    'Jest setup: Environment set to TEST with variables from .env.test'
-);
+console.log('Jest setup: Environment set to TEST with variables from .env.test');

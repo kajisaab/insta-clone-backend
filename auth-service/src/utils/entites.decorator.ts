@@ -1,9 +1,4 @@
-import {
-    ColumnOptions,
-    Column,
-    PrimaryColumn,
-    PrimaryColumnOptions
-} from 'typeorm';
+import { ColumnOptions, Column, PrimaryColumn, PrimaryColumnOptions } from 'typeorm';
 
 class NumericColumnTransformer {
     to(data: number): number {
@@ -15,41 +10,31 @@ class NumericColumnTransformer {
     }
 }
 
-export function PrimaryTextColumn(
-    options?: PrimaryColumnOptions
-): PropertyDecorator {
+export function PrimaryTextColumn(options?: PrimaryColumnOptions): PropertyDecorator {
     return PrimaryColumn({ type: 'text', ...options });
 }
 
-export function PrimaryIntegerColumn(
-    options?: PrimaryColumnOptions
-): PropertyDecorator {
+export function PrimaryIntegerColumn(options?: PrimaryColumnOptions): PropertyDecorator {
     return PrimaryColumn({
         type: 'integer',
         transformer: new NumericColumnTransformer(),
-        ...options
+        ...options,
     });
 }
 
-export function PrimaryBigIntColumn(
-    options?: PrimaryColumnOptions
-): PropertyDecorator {
+export function PrimaryBigIntColumn(options?: PrimaryColumnOptions): PropertyDecorator {
     return PrimaryColumn({
         type: 'bigint',
         transformer: new NumericColumnTransformer(),
-        ...options
+        ...options,
     });
 }
 
-export function PrimaryDateColumn(
-    options?: PrimaryColumnOptions
-): PropertyDecorator {
+export function PrimaryDateColumn(options?: PrimaryColumnOptions): PropertyDecorator {
     return PrimaryColumn({ type: 'date', ...options });
 }
 
-export function PrimaryTimestampColumn(
-    options?: PrimaryColumnOptions
-): PropertyDecorator {
+export function PrimaryTimestampColumn(options?: PrimaryColumnOptions): PropertyDecorator {
     return PrimaryColumn({ type: 'timestamp', ...options });
 }
 
@@ -74,7 +59,7 @@ export function IntegerColumn(options?: ColumnOptions): PropertyDecorator {
         type: 'integer',
         nullable: true,
         transformer: new NumericColumnTransformer(),
-        ...options
+        ...options,
     });
 }
 
@@ -83,7 +68,7 @@ export function BigIntColumn(options?: ColumnOptions): PropertyDecorator {
         type: 'bigint',
         nullable: true,
         transformer: new NumericColumnTransformer(),
-        ...options
+        ...options,
     });
 }
 
@@ -92,7 +77,7 @@ export function DecimalColumn(options?: ColumnOptions): PropertyDecorator {
         type: 'decimal',
         nullable: true,
         transformer: new NumericColumnTransformer(),
-        ...options
+        ...options,
     });
 }
 

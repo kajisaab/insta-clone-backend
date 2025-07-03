@@ -17,7 +17,6 @@ async function dbConnection(server: Server): Promise<boolean> {
             logger.error('Database connection failed after retrying');
             server.close(() => {
                 process.exit();
-
             });
         }
         RETRY_COUNT++;

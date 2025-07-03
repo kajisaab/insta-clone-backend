@@ -8,14 +8,14 @@ const complexityOptions = {
     upperCase: 1,
     numeric: 1,
     symbol: 1,
-    requirementCount: 2
+    requirementCount: 2,
 };
 
 export const userSignupSchema = Joi.object({
     firstName: Joi.string().required().messages({ 'string.empty': 'First Name is required' }),
     lastName: Joi.string().required().messages({ 'string.empty': 'last Name is required' }),
     userName: Joi.string().required().messages({
-        'string.empty': 'Username is required'
+        'string.empty': 'Username is required',
     }),
     phoneNumber: Joi.string().required().length(10).messages({
         'string.empty': 'Phone number is required',
@@ -23,7 +23,7 @@ export const userSignupSchema = Joi.object({
     }),
     email: Joi.string().email().required().messages({
         'string.email': 'Email must be a valid email',
-        'string.empty': 'Email is required'
+        'string.empty': 'Email is required',
     }),
     password: passwordComplexity(complexityOptions),
 });

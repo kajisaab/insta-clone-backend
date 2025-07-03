@@ -26,8 +26,7 @@ export const swaggerOptions = {
             type: 'apiKey',
             name: 'Authorization',
             in: 'header',
-            description:
-                'Enter your bearer token in the format: Bearer <token>',
+            description: 'Enter your bearer token in the format: Bearer <token>',
         },
     },
     definitions: {

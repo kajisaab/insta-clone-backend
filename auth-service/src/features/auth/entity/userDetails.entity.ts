@@ -1,9 +1,5 @@
 import { DbEntity } from '@common/entity/DbEntity';
-import {
-    BooleanColumn,
-    JsonbColumn,
-    TextColumn,
-} from '@utils/entites.decorator';
+import { BooleanColumn, JsonbColumn, TextColumn } from '@utils/entites.decorator';
 import { LabelValuePair } from '@common/dto/labelValuePair';
 import { Entity } from 'typeorm';
 

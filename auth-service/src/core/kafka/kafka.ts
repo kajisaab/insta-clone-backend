@@ -1,11 +1,4 @@
-import {
-    Kafka,
-    Producer,
-    Consumer,
-    EachMessagePayload,
-    logLevel,
-    Partitioners,
-} from 'kafkajs';
+import { Kafka, Producer, Consumer, EachMessagePayload, logLevel, Partitioners } from 'kafkajs';
 import AppLogger from '@core/logger';
 
 class KafkaService {
@@ -47,30 +40,21 @@ class KafkaService {
         }
     }
 
-    public async connectConsumer(
-        topic: string,
-        fromBeginning: boolean,
-        messageHandler: (payload: EachMessagePayload) => Promise<void>,
-    ): Promise<void> {
+    public async connectConsumer(topic: string, fromBeginning: boolean, messageHandler: (payload: EachMessagePayload) => Promise<void>): Promise<void> {
         try {
             await this.consumer.connect();
             await this.consumer.subscribe({ topic, fromBeginning });
             await this.consumer.run({
                 eachMessage: messageHandler,
             });
-            this.logger.log(
-                `✅ Kafka consumer connected and subscribed to ${topic}`,
-            );
+            this.logger.log(`✅ Kafka consumer connected and subscribed to ${topic}`);
         } catch (err) {
             this.logger.error(`❌ Kafka consumer connection failed: ${err}`);
             throw err;
         }
     }
 
-    public async sendMessage(
-        topic: string,
-        messages: { key?: string; value: string }[],
-    ): Promise<void> {
+    public async sendMessage(topic: string, messages: { key?: string; value: string }[]): Promise<void> {
         try {
             const result = await this.producer.send({
                 topic,

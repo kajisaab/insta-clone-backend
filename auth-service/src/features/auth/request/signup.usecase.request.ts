@@ -1,6 +1,6 @@
 import { UseCaseRequest } from '@core/usecase/usecase.request';
 
-export class SignupUseCaseRequest implements UseCaseRequest{
+export class SignupUseCaseRequest implements UseCaseRequest {
     constructor(
         public readonly phoneNumber: string,
         public readonly email: string,
@@ -8,6 +8,5 @@ export class SignupUseCaseRequest implements UseCaseRequest{
         public readonly firstName: string,
         public readonly lastName: string,
         public readonly password: string
-    ) {
-    }
+    ) {}
 }

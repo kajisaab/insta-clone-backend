@@ -1,29 +1,12 @@
 import { createClient } from 'redis';
-import type {
-    RedisClientType,
-    RedisClientOptions,
-    RedisDefaultModules,
-    RedisFunctions,
-    RedisModules,
-    RedisScripts,
-} from 'redis';
+import type { RedisClientType, RedisClientOptions, RedisDefaultModules, RedisFunctions, RedisModules, RedisScripts } from 'redis';
 import { getAppConfig } from '@config/app';
 import AppLogger from '@core/logger';
 
 export class CacheFactory {
     private static instance: CacheFactory;
-    private client: RedisClientType<
-        RedisDefaultModules & RedisModules,
-        RedisFunctions,
-        RedisScripts
-    > | null = null;
-    private connecting: Promise<
-        RedisClientType<
-            RedisDefaultModules & RedisModules,
-            RedisFunctions,
-            RedisScripts
-        >
-    > | null = null;
+    private client: RedisClientType<RedisDefaultModules & RedisModules, RedisFunctions, RedisScripts> | null = null;
+    private connecting: Promise<RedisClientType<RedisDefaultModules & RedisModules, RedisFunctions, RedisScripts>> | null = null;
     private initialized = false;
     private logger: AppLogger = new AppLogger();
 
@@ -60,13 +43,7 @@ export class CacheFactory {
     /**
      * Get or create the Redis client
      */
-    private async getOrCreateCacheClient(): Promise<
-        RedisClientType<
-            RedisDefaultModules & RedisModules,
-            RedisFunctions,
-            RedisScripts
-        >
-    > {
+    private async getOrCreateCacheClient(): Promise<RedisClientType<RedisDefaultModules & RedisModules, RedisFunctions, RedisScripts>> {
         if (this.client) {
             return this.client;
         }
@@ -87,13 +64,7 @@ export class CacheFactory {
     /**
      * Create and connect to Redis
      */
-    private async createCacheClient(): Promise<
-        RedisClientType<
-            RedisDefaultModules & RedisModules,
-            RedisFunctions,
-            RedisScripts
-        >
-    > {
+    private async createCacheClient(): Promise<RedisClientType<RedisDefaultModules & RedisModules, RedisFunctions, RedisScripts>> {
         const redisConfigOptions: RedisClientOptions = {
             url: getAppConfig().redisUrl,
             socket: {
@@ -131,11 +102,7 @@ export class CacheFactory {
     /**
      * Store data in Redis cache
      */
-    public async cacheData(
-        key: string,
-        data: unknown,
-        config?: { ttl?: number; max?: number }
-    ): Promise<void> {
+    public async cacheData(key: string, data: unknown, config?: { ttl?: number; max?: number }): Promise<void> {
         const redisClient = await this.getOrCreateCacheClient();
 
         if (config?.ttl) {
@@ -150,19 +117,14 @@ export class CacheFactory {
     /**
      * Store the multiple data on the single key.
      */
-    public async cacheSetData(
-        key: string,
-        data: string | string[] | object[]
-    ): Promise<void> {
+    public async cacheSetData(key: string, data: string | string[] | object[]): Promise<void> {
         const redisClient = await this.getOrCreateCacheClient();
 
         let members: string[] = [data as string];
 
         if (Array.isArray(data)) {
             // If data contains objects, we need to stringify them
-            members = data.map((item) =>
-                typeof item === 'object' ? JSON.stringify(item) : item
-            );
+            members = data.map((item) => (typeof item === 'object' ? JSON.stringify(item) : item));
         }
         // Add the key as the first argument, followed by the set members
         await redisClient.sAdd(key, members);

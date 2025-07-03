@@ -27,9 +27,9 @@ To run tests with a real Kafka instance:
 
 The Kafka tests use the following environment variables:
 
--   `NODE_ENV=test`: Indicates test environment
--   `KAFKA_TEST_REAL=true`: Enables real Kafka connections during tests
--   `KAFKA_BROKER`: Comma-separated list of Kafka brokers (default: localhost:9092,localhost:9093)
+- `NODE_ENV=test`: Indicates test environment
+- `KAFKA_TEST_REAL=true`: Enables real Kafka connections during tests
+- `KAFKA_BROKER`: Comma-separated list of Kafka brokers (default: localhost:9092,localhost:9093)
 
 ## Troubleshooting
 

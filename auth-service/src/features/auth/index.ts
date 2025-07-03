@@ -7,11 +7,8 @@ import { userSignupSchema } from '@features/auth/validationSchema/signup.validat
 
 const authRouter = Router();
 
-authRouter.post(
-    '/login',
-    validate(loginValidation),
-    (req: Request, res: Response, next: NextFunction) => {
-        /**
+authRouter.post('/login', validate(loginValidation), (req: Request, res: Response, next: NextFunction) => {
+    /**
     #swagger.tags = ['User'];
     #swagger.description = 'Endpoint to sign in a specific user';
     #swagger.path = '/auth/login';
@@ -26,16 +23,11 @@ authRouter.post(
         description: 'User registered successfully.'
     };
      */
-        return asyncHandler(AuthController.loginController)(req, res, next);
-    }
-);
+    return asyncHandler(AuthController.loginController)(req, res, next);
+});
 
-authRouter.post(
-    '/signup',
-    validate(userSignupSchema),
-    (req: Request, res: Response, next: NextFunction) => {
-        return asyncHandler(AuthController.signupController)(req, res, next);
-    }
-);
+authRouter.post('/signup', validate(userSignupSchema), (req: Request, res: Response, next: NextFunction) => {
+    return asyncHandler(AuthController.signupController)(req, res, next);
+});
 
 export default authRouter;

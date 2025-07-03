@@ -1,9 +1,4 @@
-import {
-    BooleanColumn,
-    JsonbColumn,
-    PrimaryTextColumn,
-    TimestampColumn,
-} from '@/src/utils/entites.decorator';
+import { BooleanColumn, JsonbColumn, PrimaryTextColumn, TimestampColumn } from '@/src/utils/entites.decorator';
 import { LabelValuePair } from '../dto/labelValuePair';
 import { Entity } from 'typeorm';
 

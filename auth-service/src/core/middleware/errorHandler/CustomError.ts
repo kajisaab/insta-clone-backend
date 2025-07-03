@@ -6,16 +6,12 @@ export class CustomError extends Error {
         message: string;
     };
 
-    constructor(
-        message: string = 'Error',
-        status: number = 400,
-        code: string = '-1'
-    ) {
+    constructor(message: string = 'Error', status: number = 400, code: string = '-1') {
         super(message);
         this.code = code;
         this.status = status;
         this.data = {
-            message
+            message,
         };
     }
 }

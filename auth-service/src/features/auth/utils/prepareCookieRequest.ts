@@ -3,6 +3,5 @@ export class PrepareCookieRequest {
         public readonly maxAge: number,
         public readonly key: string,
         public readonly value: string | object
-    ) {
-    }
+    ) {}
 }

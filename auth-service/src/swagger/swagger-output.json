@@ -1,128 +1,114 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "Instagram Clone API",
-    "description": "API documentation for Instagram Clone backend",
-    "version": "1.0.0",
-    "contact": {
-      "name": "Aman Khadka"
+    "swagger": "2.0",
+    "info": {
+        "title": "Instagram Clone API",
+        "description": "API documentation for Instagram Clone backend",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Aman Khadka"
+        },
+        "license": {
+            "name": "MIT"
+        }
     },
-    "license": {
-      "name": "MIT"
-    }
-  },
-  "host": "localhost",
-  "basePath": "/api/v1",
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "securityDefinitions": {
-    "bearerAuth": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "Enter your bearer token in the format: Bearer <token>"
-    }
-  },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "paths": {
-    "/auth/login": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to sign in a specific user",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "User information.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LoginRequest"
+    "host": "localhost",
+    "basePath": "/api/v1",
+    "schemes": ["http", "https"],
+    "securityDefinitions": {
+        "bearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Enter your bearer token in the format: Bearer <token>"
+        }
+    },
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": ["User"],
+                "description": "Endpoint to sign in a specific user",
+                "parameters": [
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "description": "User information.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LoginResponse"
+                        },
+                        "description": "User registered successfully."
+                    }
+                }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/LoginResponse"
+        },
+        "/signup": {
+            "post": {
+                "description": "",
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "LoginRequest": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "example": "kajisaab"
+                },
+                "enc_password": {
+                    "type": "string",
+                    "example": "password"
+                },
+                "ip": {
+                    "type": "string",
+                    "example": "127.0.0.1"
+                },
+                "optIntoOneTap": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "queryParams": {
+                    "type": "string",
+                    "example": "{}"
+                }
             },
-            "description": "User registered successfully."
-          }
-        }
-      }
-    },
-    "/signup": {
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "LoginRequest": {
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string",
-          "example": "kajisaab"
+            "required": ["username", "enc_password", "ip", "optIntoOneTap"]
         },
-        "enc_password": {
-          "type": "string",
-          "example": "password"
-        },
-        "ip": {
-          "type": "string",
-          "example": "127.0.0.1"
-        },
-        "optIntoOneTap": {
-          "type": "boolean",
-          "example": false
-        },
-        "queryParams": {
-          "type": "string",
-          "example": "{}"
-        }
-      },
-      "required": [
-        "username",
-        "enc_password",
-        "ip",
-        "optIntoOneTap"
-      ]
-    },
-    "LoginResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "number",
-          "example": 0
-        },
-        "message": {
-          "type": "string",
-          "example": "SUCCESS"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "message": {
-              "type": "string",
-              "example": "Login successful"
+        "LoginResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "number",
+                    "example": 0
+                },
+                "message": {
+                    "type": "string",
+                    "example": "SUCCESS"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                            "type": "string",
+                            "example": "Login successful"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 }

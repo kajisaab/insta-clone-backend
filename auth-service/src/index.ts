@@ -17,11 +17,11 @@ const { port } = getAppConfig();
 async function startServer() {
     try {
         const response: boolean = await dbConnection(server);
-        if(response){
+        if (response) {
             await CacheFactory.getInstance().initialize();
             const kafka = KafkaService.getInstance();
             await kafka.connectProducer(); // <---- REQUIRED
-            server.listen(port, async() => {
+            server.listen(port, async () => {
                 logger.log(`✅ Server is listening on port::${port}`);
             });
         }
@@ -32,8 +32,8 @@ async function startServer() {
 
 // Only start the server if not in test environment
 if (!isTestEnvironment()) {
-// Properly handle the promise to catch any unhandled rejections
-    startServer().catch(error => {
+    // Properly handle the promise to catch any unhandled rejections
+    startServer().catch((error) => {
         logger.error(`Unhandled error during server startup: ${error}`);
         process.exit(1);
     });

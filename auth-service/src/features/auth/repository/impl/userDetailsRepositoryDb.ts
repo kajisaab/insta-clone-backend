@@ -5,7 +5,6 @@ import { UserDetailsDbResponseDto } from '@features/auth/dto/userDetailsDbRespon
 import transformRawResult from '@features/auth/utils/transformRawResult';
 
 export class UserDetailsRepositoryDb implements UserDetailsRepository {
-
     private userDetailsRepository: Repository<UserDetails>;
 
     constructor(connection: EntityManager) {
@@ -13,12 +12,14 @@ export class UserDetailsRepositoryDb implements UserDetailsRepository {
     }
 
     async findBy_Email_or_Username_or_PhoneNumber(email: string, userName: string, phoneNumber: string): Promise<string | null> {
-        const result = await this.userDetailsRepository.createQueryBuilder('user_details')
-            .select('CASE ' +
-            'WHEN user_details.email = :email THEN \'Email is already in use\' ' +
-                'WHEN user_details.phone_number = :phoneNumber THEN \'Phone number is already in use\' ' +
-                'WHEN user_details.user_name = :userName THEN \'Username is already in use\' ' +
-                'END as message'
+        const result = await this.userDetailsRepository
+            .createQueryBuilder('user_details')
+            .select(
+                'CASE ' +
+                    "WHEN user_details.email = :email THEN 'Email is already in use' " +
+                    "WHEN user_details.phone_number = :phoneNumber THEN 'Phone number is already in use' " +
+                    "WHEN user_details.user_name = :userName THEN 'Username is already in use' " +
+                    'END as message'
             )
             .where('user_details.email = :email', { email })
             .orWhere('user_details.user_name = :userName', { userName })
@@ -29,8 +30,8 @@ export class UserDetailsRepositoryDb implements UserDetailsRepository {
     }
 
     async findBy_Email_Username_PhoneNumber(userIdentifier: string): Promise<UserDetailsDbResponseDto | null> {
-
-        const rawResult = await this.userDetailsRepository.createQueryBuilder('user_details')
+        const rawResult = await this.userDetailsRepository
+            .createQueryBuilder('user_details')
             .leftJoin('user_credentials', 'user_credentials', 'user_credentials.user_id = user_details.id')
             .select([
                 'user_details.id',
@@ -53,9 +54,9 @@ export class UserDetailsRepositoryDb implements UserDetailsRepository {
                 'user_credentials.password',
                 'user_credentials.max_login_attempts',
                 'user_credentials.login_attempts',
-                'user_credentials.password_history'
+                'user_credentials.password_history',
             ])
-            .where('user_details.email = :userIdentifier', {userIdentifier})
+            .where('user_details.email = :userIdentifier', { userIdentifier })
             .orWhere('user_details.user_name = :userIdentifier', { userIdentifier })
             .orWhere('user_details.phone_number = :userIdentifier', { userIdentifier })
             .getRawOne();
@@ -65,5 +66,4 @@ export class UserDetailsRepositoryDb implements UserDetailsRepository {
         // Transform the raw result into a clean object with proper camelCase properties
         return transformRawResult(rawResult);
     }
-
 }

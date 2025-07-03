@@ -9,5 +9,5 @@ export default function generateUUId(version: IdType = IdType.V4): string {
 
 export enum IdType {
     V1,
-    V4
+    V4,
 }

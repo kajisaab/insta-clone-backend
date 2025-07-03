@@ -7,5 +7,5 @@ export enum StatusCode {
     NOT_FOUND = 404,
     DB_CRASH = 503,
     INTERNAL_SERVER_ERROR = 500,
-    REJECTED_URL = 301
+    REJECTED_URL = 301,
 }

@@ -9,9 +9,7 @@ export const validate = (schema: Joi.ObjectSchema) => {
             next();
         } catch (error) {
             const details = (error as Joi.ValidationError).details;
-            const message = details
-                .map((i) => i.message.replace(/"/g, ''))
-                .join(' & ');
+            const message = details.map((i) => i.message.replace(/"/g, '')).join(' & ');
             next(new BadRequestException(message, 'Bad Request'));
         }
     };
