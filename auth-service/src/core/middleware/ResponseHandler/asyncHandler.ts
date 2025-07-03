@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import type { NextFunction, Request, Response } from 'express';
 import AppLogger from '../../logger';
 import { Result } from './Result';
