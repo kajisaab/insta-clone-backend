@@ -1,0 +1,18 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": ".",
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["*"],
+            "@config/*": ["src/config/*"],
+            "@common/*": ["src/common/*"],
+            "@utils/*": ["src/utils/*"],
+            "@core/*": ["src/core/*"],
+            "@features/*": ["src/features/*"],
+            "@src/*": ["src/*"]
+        }
+    },
+    "include": ["src/**/*.ts", "test/**/*.ts"]
+}

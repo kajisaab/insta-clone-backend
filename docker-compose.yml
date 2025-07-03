@@ -140,7 +140,7 @@ services:
     post-service:
         build:
             context: .
-            dockerfile: post-services/Dockerfile
+            dockerfile: post-service/Dockerfile
         container_name: post-services
         ports:
             - '3001:3000'
