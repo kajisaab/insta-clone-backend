@@ -50,17 +50,6 @@ export default tseslint.config(
     // Custom TypeScript rules
     {
         files: ['**/*.ts', '**/*.tsx'],
-        overrides: [
-            {
-                files: ['src/migration/**/*.{ts,js}'],
-                rules: {
-                    // disable all rules or specific ones
-                    '@typescript-eslint/no-unused-vars': 'off',
-                    // or disable everything
-                    all: 'off',
-                },
-            },
-        ],
         rules: {
             '@typescript-eslint/no-require-imports': 'off',
             '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
@@ -82,6 +71,14 @@ export default tseslint.config(
             '@typescript-eslint/space-before-function-paren': 'off',
             '@typescript-eslint/comma-dangle': 'off',
             '@typescript-eslint/member-delimiter-style': 'off',
+        },
+    },
+
+    {
+        files: ['src/migration/**/*.{ts,js}'],
+        rules: {
+            '@typescript-eslint/no-unused-vars': 'off',
+            // Add more rules to disable as needed
         },
     }
 );

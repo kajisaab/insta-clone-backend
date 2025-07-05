@@ -1,5 +1,6 @@
 const { readFileSync } = require('node:fs');
 const { resolve } = require('node:path');
+const logger = require('../src/core/logger');
 
 // Set NODE_ENV to 'test' for all Jest tests
 process.env.NODE_ENV = 'test';
@@ -15,4 +16,4 @@ readFileSync(resolve(process.cwd(), '.env.test'), 'utf8')
         }
     });
 
-console.log('Jest setup: Environment set to TEST with variables from .env.test');
+logger.log('Jest setup: Environment set to TEST with variables from .env.test');
