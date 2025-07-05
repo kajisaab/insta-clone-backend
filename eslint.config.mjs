@@ -50,6 +50,17 @@ export default tseslint.config(
     // Custom TypeScript rules
     {
         files: ['**/*.ts', '**/*.tsx'],
+        overrides: [
+            {
+                files: ['src/migration/**/*.{ts,js}'],
+                rules: {
+                    // disable all rules or specific ones
+                    '@typescript-eslint/no-unused-vars': 'off',
+                    // or disable everything
+                    all: 'off',
+                },
+            },
+        ],
         rules: {
             '@typescript-eslint/no-require-imports': 'off',
             '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],

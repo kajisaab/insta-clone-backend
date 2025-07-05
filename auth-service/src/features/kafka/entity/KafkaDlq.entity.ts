@@ -1,7 +1,7 @@
 import { PrimaryTextColumn, TextColumn, TimestampColumn } from '@/src/utils/entites.decorator';
 import { Entity } from 'typeorm';
 
-@Entity({ name: 'kafka_dql', schema: 'instagram ' })
+@Entity({ name: 'kafka_dlq', schema: 'instagram' })
 export class KafkaDlqEntity {
     @PrimaryTextColumn()
     id!: string;

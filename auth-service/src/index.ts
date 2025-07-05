@@ -12,7 +12,9 @@ const logger = new AppLogger();
 const server = http.createServer(app);
 
 // Get port from environment configuration
-const { port } = getAppConfig();
+const { port, dbHost, dbPort, dbName } = getAppConfig();
+
+console.log({ dbHost, dbPort, dbName });
 
 async function startServer() {
     try {
